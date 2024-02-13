@@ -1,20 +1,24 @@
-import getApplications from '@/lib/db/getApplications';
+import { getApplicationsByPage } from '@/lib/db/action';
+import{ getApplications, getTotalApplication } from '@/lib/db/getApplications';
+import LoadMore from '../components/LoadMore';
 
 const getData = async () => {
   const applications = await getApplications();
 
-  console.log(applications);
   return applications;
 }
 
 export default async function page() {
-  const applications = await getData()
+  const totalCount = await getTotalApplication();
+  const data = await getApplicationsByPage(1);
+
   return (
     <div>
       <h1>Your data!!</h1>
-      {applications.map(item => (
-        <div key={item._id}>{item.speciality_name}</div>
-      ))}
+      <ul>
+        {data}
+        <LoadMore totalPage={totalCount / 50}/>
+      </ul>
     </div>
   )
 }
