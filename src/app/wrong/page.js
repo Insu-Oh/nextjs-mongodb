@@ -12,9 +12,9 @@ export default async function page() {
   return (
     <div>
       <h1>Your data!!</h1>
-      {/* {data.map(item => (
+      {applications.map(item => (
         <div key={item._id}>{item.speciality_name}</div>
-      ))} */}
+      ))}
     </div>
   )
 }
